@@ -88,7 +88,7 @@ function SalarySlide() {
 
   const data = useMemo(
     () =>
-      DEPARTMENTS[dept].map((l) => ({
+      DEPARTMENTS[dept]!.map((l) => ({
         ...l,
         range: l.max - l.min,
         compa: Math.round((l.avgActual / l.mid) * 100),
