@@ -96,7 +96,7 @@ function SalarySlide() {
     [dept],
   );
 
-  const selected = data.find((d) => d.level === activeLevel) ?? data[Math.min(2, data.length - 1)];
+  const selected = (data.find((d) => d.level === activeLevel) ?? data[Math.min(2, data.length - 1)])!;
   const totalHeadcount = data.reduce((s, d) => s + d.headcount, 0);
   const avgCompa = Math.round(
     data.reduce((s, d) => s + (d.avgActual / d.mid) * 100 * d.headcount, 0) / totalHeadcount,
@@ -166,7 +166,7 @@ function SalarySlide() {
                   <Tooltip
                     cursor={{ fill: "var(--color-accent)" }}
                     contentStyle={{ background: "var(--color-popover)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }}
-                    formatter={(v: number, name: string) => [fmt(v), name]}
+                    formatter={(v, name) => [fmt(Number(v)), String(name)]}
                   />
                   {/* Invisible base to float the range bar */}
                   <Bar dataKey="min" stackId="band" fill="transparent" isAnimationActive={false} />
@@ -213,7 +213,7 @@ function SalarySlide() {
                   <Tooltip
                     cursor={{ fill: "var(--color-accent)" }}
                     contentStyle={{ background: "var(--color-popover)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }}
-                    formatter={(v: number) => [`${v}%`, "Compa-ratio"]}
+                    formatter={(v) => [`${Number(v)}%`, "Compa-ratio"]}
                   />
                   <Line type="monotone" dataKey={() => 100} stroke="var(--color-muted-foreground)" strokeDasharray="4 4" dot={false} name="Target (100%)" />
                   <Bar dataKey="compa" radius={[6, 6, 0, 0]} name="Compa-ratio">
